@@ -2,8 +2,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export default {
+const enviroment = {
 
     PORT:process.env.PORT
 
 }
+
+export default enviroment;
