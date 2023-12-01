@@ -1,14 +1,18 @@
+import productModel from "../models/products.model.js"
+
 const productControllers = {
 
-    getAllProducts:(req, res)=>{
+    getAllProducts: async(req, res)=>{
 
         try {
+
+            const allProducts = await productModel.find();
     
             const resolve = {
     
                 status:200,
                 msj:"Productos Obtenidos",
-                data:[]
+                data:allProducts
     
             }
             
@@ -23,22 +27,23 @@ const productControllers = {
         })}
     
     },
-    
-    getOneProduct:(req, res)=>{
 
+    getOneProduct: async(req, res)=>{
+        
         try {
-    
-            const { id } = req.params;
-            const { name } = req.query;
-    
+
+            const { paramid } = req.params;
+
+            const product = await productModel.findOne({ _id: paramid}) 
+
             const resolve = {
     
                 status:200,
                 msj:"Productos Obtenidos",
-                data:`Producto nro ${id}, nombre:${name}`
+                data:product
     
             }
-    
+            
             res.status(200).send(resolve)
             
         } catch (err) { res.status(404).send({
@@ -48,8 +53,37 @@ const productControllers = {
             data:err
     
         })}
+    },
+
+    createOneProduct: async(req, res)=>{
+
+        try {
+
+            const {body} = req;
+
+            const newProduct = await productModel.create(body);
     
-    }
+            const resolve = {
+    
+                status:200,
+                msj:"Producto Creado",
+                data:newProduct
+    
+            }
+            
+            res.status(200).send(resolve)
+            
+        } catch (err) { res.status(404).send({
+    
+            status:404,
+            msj:"Hubo un error",
+            data:err
+    
+        })}
+
+    },
+
+
 
 }
 

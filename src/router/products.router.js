@@ -3,11 +3,14 @@ import productControllers from "../controllers/products.controller.js" ;
 
 const productRouter = Router();
 
-//obtener todos los products
+//obtener todos los productos
 productRouter.get( "/", productControllers.getAllProducts );
 
-//obtener un producto
-productRouter.get( "/:id", productControllers.getOneProduct );
+//obtener Un producto
+productRouter.get( "/:paramid", productControllers.getOneProduct )
+
+//crear un producto
+productRouter.post("/", productControllers.createOneProduct);
 
 
 export default productRouter;
