@@ -10,4 +10,4 @@ productRouter.get( "/", productControllers.getAllProducts );
 productRouter.get( "/:id", productControllers.getOneProduct );
 
 
-export default productRouter
+export default productRouter;
