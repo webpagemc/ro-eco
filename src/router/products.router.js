@@ -12,5 +12,7 @@ productRouter.get( "/:paramid", productControllers.getOneProduct )
 //crear un producto
 productRouter.post("/", productControllers.createOneProduct);
 
+productRouter.put("/:paramid", productControllers.updateProduct );
+
 
 export default productRouter;

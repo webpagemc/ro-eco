@@ -61,7 +61,7 @@ const productControllers = {
 
             const {body} = req;
 
-            const newProduct = await productModel.create(body);
+            const newProduct = productModel.create(body);
     
             const resolve = {
     
@@ -83,7 +83,32 @@ const productControllers = {
 
     },
 
+    updateProduct : async(req, res) => {
 
+        try {
+
+            const {paramid} = req.params;
+            const {body} = req;
+
+            const updatedProduct = await productModel.findOneAndUpdate( {_id:paramid}, body );
+
+            const resolve = {
+                status:200,
+                msj:"Producto Actualizado",
+                data:updatedProduct
+            }
+            
+            res.status(200).send(resolve)
+            
+        } catch (err) { res.status(404).send({
+    
+            status:404,
+            msj:"Hubo un error",
+            data:err
+    
+        })}
+
+    }
 
 }
 
