@@ -14,5 +14,9 @@ productRouter.post("/", productControllers.createOneProduct);
 
 productRouter.put("/:paramid", productControllers.updateProduct );
 
+productRouter.delete("/trash/:paramid", productControllers.deleteTemporary );
+
+productRouter.delete("/:paramid", productControllers.deleteOneProduct );
+
 
 export default productRouter;

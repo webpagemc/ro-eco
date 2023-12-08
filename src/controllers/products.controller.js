@@ -6,7 +6,7 @@ const productControllers = {
 
         try {
 
-            const allProducts = await productModel.find();
+            const allProducts = await productModel.find( {visible:true} );
     
             const resolve = {
     
@@ -34,17 +34,33 @@ const productControllers = {
 
             const { paramid } = req.params;
 
-            const product = await productModel.findOne({ _id: paramid}) 
+            const product = await productModel.findOne( { _id: paramid} ) 
 
-            const resolve = {
+            if(product.visible === false){ 
+
+                const resolve = {
     
-                status:200,
-                msj:"Productos Obtenidos",
-                data:product
-    
-            }
+                    status:400,
+                    msj:"Product NOT visible",
+                    data:{visible:false}
+        
+                }
+                
+                res.status(400).send(resolve);
             
-            res.status(200).send(resolve)
+            }else{
+
+                const resolve = {
+    
+                    status:200,
+                    msj:"Productos Obtenidos",
+                    data:product
+        
+                }
+                
+                res.status(200).send(resolve)
+
+            }
             
         } catch (err) { res.status(404).send({
     
@@ -61,7 +77,7 @@ const productControllers = {
 
             const {body} = req;
 
-            const newProduct = productModel.create(body);
+            const newProduct = await productModel.create(body);
     
             const resolve = {
     
@@ -90,7 +106,7 @@ const productControllers = {
             const {paramid} = req.params;
             const {body} = req;
 
-            const updatedProduct = await productModel.findOneAndUpdate( {_id:paramid}, body );
+            const updatedProduct = await productModel.findOneAndUpdate( {_id: paramid} , body );
 
             const resolve = {
                 status:200,
@@ -108,7 +124,60 @@ const productControllers = {
     
         })}
 
+    },
+
+    deleteTemporary: async (req, res) => {
+
+        try {
+
+            const {paramid} = req.params;
+            const deletedProduct = await productModel.findOneAndUpdate( {_id: paramid} , { visible:false } );
+
+            const resolve = {
+                status:200,
+                msj:"Producto Enviado a Papelera",
+                data:deletedProduct
+            }
+            
+            res.status(200).send(resolve)
+            
+        } catch (err) { res.status(404).send({
+    
+            status:404,
+            msj:"Hubo un error",
+            data:err
+    
+        })}
+
+    },
+
+    deleteOneProduct: async (req, res) => {
+
+        try {
+
+            const {paramid} = req.params;
+            const deletedProduct = await productModel.findOneAndDelete( {_id:paramid} );
+
+            const resolve = {
+                status:200,
+                msj:"Producto Elimado",
+                data: deletedProduct
+            }
+            
+            res.status(200).send(resolve)
+            
+        } catch (err) { res.status(404).send({
+    
+            status:404,
+            msj:"Hubo un error",
+            data:err
+    
+        })}
+
+
     }
+
+    
 
 }
 
