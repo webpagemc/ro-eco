@@ -2,6 +2,7 @@ import productModel from "../models/products.model.js"
 
 const productControllers = {
 
+    
     getAllProducts: async(req, res)=>{
 
         try {
@@ -176,8 +177,6 @@ const productControllers = {
 
 
     }
-
-    
 
 }
 

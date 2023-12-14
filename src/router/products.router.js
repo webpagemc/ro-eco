@@ -12,10 +12,13 @@ productRouter.get( "/:paramid", productControllers.getOneProduct )
 //crear un producto
 productRouter.post("/", productControllers.createOneProduct);
 
+//actualizar producto
 productRouter.put("/:paramid", productControllers.updateProduct );
 
+//enviar a la papelera
 productRouter.delete("/trash/:paramid", productControllers.deleteTemporary );
 
+//eliminar definitivamente
 productRouter.delete("/:paramid", productControllers.deleteOneProduct );
 
 
