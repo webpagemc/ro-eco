@@ -2,12 +2,11 @@ import productModel from "../models/products.model.js"
 
 const productControllers = {
 
-    
     getAllProducts: async(req, res)=>{
 
         try {
 
-            const allProducts = await productModel.find( {visible:true} );
+            const allProducts = await productModel.find( { visible:true } );
     
             const resolve = {
     
@@ -33,7 +32,7 @@ const productControllers = {
         
         try {
 
-            const { paramid } = req.params;
+            const { paramid } = req.params
 
             const product = await productModel.findOne( { _id: paramid} ) 
 

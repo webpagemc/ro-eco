@@ -6,15 +6,17 @@ import dbConnect from "./config/mongoose.js";
 
 import productRouter from "./router/products.router.js";
 import viewsRouter from "./router/views.router.js";
+import cors from "cors"
 
 const app = express();
 
 //middlewares
 app.use( express.urlencoded() ); //permite aceptar formularios
-app.use( express.json() ); //permite trabajar con jsons
+app.use( express.json() ); //permite trabajar con json
+app.use( cors() );
 
 //rutas
-app.use("/views", viewsRouter)
+app.use("/views", viewsRouter);
 app.use("/products", productRouter);
 
 //static files

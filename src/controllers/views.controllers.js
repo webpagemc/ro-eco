@@ -10,6 +10,12 @@ const viewsControllers = {
 
         res.render("info");
     
+    },
+
+    addProducts: (req, res)=>{
+
+        res.render("addProducts");
+    
     }
 
 
