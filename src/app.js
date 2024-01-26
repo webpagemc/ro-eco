@@ -22,6 +22,8 @@ app.use("/products", productRouter);
 //static files
 app.use( express.static("src/public") );
 
+
+
 //hbs
 app.engine("hbs", hbs.engine());
 app.set("view engine", "hbs");

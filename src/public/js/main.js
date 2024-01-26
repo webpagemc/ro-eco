@@ -1,1 +1,0 @@
-window.alert("Se importo el script")

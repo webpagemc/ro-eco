@@ -16,6 +16,12 @@ const viewsControllers = {
 
         res.render("addProducts");
     
+    },
+
+    manageProducts: (req, res) => {
+
+        res.render("manageProducts");
+
     }
 
 
